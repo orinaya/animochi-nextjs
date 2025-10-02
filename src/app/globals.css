@@ -1,23 +1,75 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: var(--color-latte-50);
   --foreground: #171717;
 }
 
 @theme inline {
+  --color-blueberry-50: #ebeaff;
+  --color-blueberry-100: #d9d8ff;
+  --color-blueberry-200: #c0baff;
+  --color-blueberry-300: #9d90ff;
+  --color-blueberry-400: #8564ff;
+  --color-blueberry-500: #7840ff;
+  --color-blueberry-600: #741fff;
+  --color-blueberry-700: #6a14ee;
+  --color-blueberry-800: #5414bf;
+  --color-blueberry-900: #451a95;
+  /* main */
+  --color-blueberry-950: #190933;
+
+  --color-strawberry-50: #fdf5f3;
+  --color-strawberry-100: #fbe9e5;
+  --color-strawberry-200: #f9d6cf;
+  --color-strawberry-300: #f4b9ad;
+  /* main */
+  --color-strawberry-400: #ee9e8e;
+  --color-strawberry-500: #df6b54;
+  --color-strawberry-600: #cb5037;
+  --color-strawberry-700: #aa402b;
+  --color-strawberry-800: #8d3827;
+  --color-strawberry-900: #763326;
+  --color-strawberry-950: #40170f;
+
+  --color-peach-50: #fff4ed;
+  /* main */
+  --color-peach-100: #ffdbc3;
+  --color-peach-200: #fec9aa;
+  --color-peach-300: #fda374;
+  --color-peach-400: #fb713c;
+  --color-peach-500: #f94c16;
+  --color-peach-600: #ea320c;
+  --color-peach-700: #c2220c;
+  --color-peach-800: #9a1d12;
+  --color-peach-900: #7c1b12;
+  --color-peach-950: #430a07;
+
+  /* main */
+  --color-latte-50: #fff5e0;
+  --color-latte-100: #feecc7;
+  --color-latte-200: #fdd88a;
+  --color-latte-300: #fcbe4d;
+  --color-latte-400: #fba524;
+  --color-latte-500: #f5810b;
+  --color-latte-600: #d95d06;
+  --color-latte-700: #b43e09;
+  --color-latte-800: #92300e;
+  --color-latte-900: #78280f;
+  --color-latte-950: #451203;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
   background: var(--background);
