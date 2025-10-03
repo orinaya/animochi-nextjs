@@ -2,7 +2,7 @@
 
 :root {
   --background: var(--color-latte-50);
-  --foreground: #171717;
+  --foreground: var(--color-blueberry-950);
 }
 
 @theme inline {
@@ -20,6 +20,7 @@
   --color-blueberry-950: #190933;
 
   --color-strawberry-50: #fdf5f3;
+  --color-strawberry-25: #fefbfa;
   --color-strawberry-100: #fbe9e5;
   --color-strawberry-200: #f9d6cf;
   --color-strawberry-300: #f4b9ad;
@@ -47,6 +48,7 @@
 
   /* main */
   --color-latte-50: #fff5e0;
+  --color-latte-25: #fffcf7;
   --color-latte-100: #feecc7;
   --color-latte-200: #fdd88a;
   --color-latte-300: #fcbe4d;
