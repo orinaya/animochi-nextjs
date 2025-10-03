@@ -1,0 +1,5 @@
+export { default as HeroSection } from './hero-section'
+export { default as BenefitsSection } from './benefits-section'
+export { default as MonstersSection } from './monsters-section'
+export { default as ActionsSection } from './actions-section'
+export { default as NewsletterSection } from './newsletter-section'
