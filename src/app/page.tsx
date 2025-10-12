@@ -8,7 +8,7 @@ import {
   NewsletterSection
 } from '@/components/sections'
 
-export default function Home (): React.ReactNode {
+export default function Home(): React.ReactNode {
   return (
     <div className='min-h-screen bg-latte-50'>
       <Header />

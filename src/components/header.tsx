@@ -2,6 +2,7 @@ import Button from '@/components/ui/button'
 import AnimochiLogo from '@/app/animochi-line.svg'
 import Image from 'next/image'
 import Link from 'next/link'
+import { FiUser, FiUserPlus } from 'react-icons/fi'
 
 interface HeaderProps {
   children?: React.ReactNode
@@ -9,7 +10,7 @@ interface HeaderProps {
 
 export default function Header ({ children }: HeaderProps): React.ReactNode {
   return (
-    <header className='fixed top-0 left-0 right-0 z-50 bg-latte-50/95 backdrop-blur-md border-b border-strawberry-200 px-4 py-3'>
+    <header className=' top-0 left-0 right-0 z-50 bg-latte-50/95 backdrop-blur-md px-4 py-3'>
       <div className='max-w-6xl mx-auto flex items-center justify-between'>
         {/* Logo */}
         <Link href='/' className='flex items-center gap-2 hover:opacity-80 transition-opacity'>
@@ -18,7 +19,7 @@ export default function Header ({ children }: HeaderProps): React.ReactNode {
         </Link>
 
         {/* Navigation */}
-        <nav className='hidden md:flex items-center gap-6'>
+        {/* <nav className='hidden md:flex items-center gap-6'>
           <a href='#hero' className='hover:opacity-80 transition-colors'>
             Accueil
           </a>
@@ -34,12 +35,17 @@ export default function Header ({ children }: HeaderProps): React.ReactNode {
           <a href='#newsletter' className='hover:opacity-80 transition-colors'>
             Newsletter
           </a>
-        </nav>
+        </nav> */}
 
         {/* CTA Button */}
-        <Button size='md' variant='primary' color='strawberry'>
-          Créer mon compagnon
-        </Button>
+        <div className='hidden md:flex items-center gap-4'>
+          <Button size='md' variant='ghost' color='blueberry' iconBefore={FiUser}>
+            Se connecter
+          </Button>
+          <Button size='md' variant='primary' color='blueberry' iconBefore={FiUserPlus}>
+            S'inscrire
+          </Button>
+        </div>
 
         {/* Mobile menu button */}
         <button className='md:hidden p-2'>
