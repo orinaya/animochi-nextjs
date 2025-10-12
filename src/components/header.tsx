@@ -10,7 +10,7 @@ interface HeaderProps {
 
 export default function Header ({ children }: HeaderProps): React.ReactNode {
   return (
-    <header className=' top-0 left-0 right-0 z-50 bg-latte-50/95 backdrop-blur-md px-4 py-3'>
+    <header className=' top-0 left-0 right-0 z-50 bg-strawberry-100 backdrop-blur-md px-4 py-3'>
       <div className='max-w-6xl mx-auto flex items-center justify-between'>
         {/* Logo */}
         <Link href='/' className='flex items-center gap-2 hover:opacity-80 transition-opacity'>

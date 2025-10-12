@@ -30,3 +30,22 @@ export interface Benefit {
   icon: string
   color: ThemeColor
 }
+
+export interface Animal {
+  id: string
+  name: string
+  firstName: string
+  type: string
+  image: string
+}
+
+export interface SectionContentProps {
+  title: string
+  highlightedWords: string
+  content: string
+  alignment?: 'left' | 'center' | 'right'
+  titleSize?: 'sm' | 'md' | 'lg' | 'xl'
+  buttons?: React.ReactNode
+  className?: string
+  children?: React.ReactNode
+}

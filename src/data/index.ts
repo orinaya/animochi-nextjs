@@ -1,4 +1,4 @@
-import { type Monster, type GameAction, type Benefit } from '@/types'
+import { type Monster, type GameAction, type Benefit, type Animal } from '@/types'
 
 export const monsters: Monster[] = [
   {
@@ -105,5 +105,127 @@ export const benefits: Benefit[] = [
       'Votre créature grandit, apprend et développe sa personnalité au fil de vos aventures partagées.',
     icon: '🌟',
     color: 'peach'
+  }
+]
+
+export const animals: Animal[] = [
+  {
+    id: '1',
+    name: 'Le panda roux',
+    firstName: 'Milo',
+    type: 'Aventurier',
+    image: '/assets/images/animals/panda-roux.png'
+  },
+  {
+    id: '2',
+    name: 'Le corbeau',
+    firstName: 'Nook',
+    type: 'Sorcier',
+    image: '/assets/images/animals/corbeau.png'
+  },
+  {
+    id: '4',
+    name: 'Le cerf',
+    firstName: 'Céleste',
+    type: 'Chevalier',
+    image: '/assets/images/animals/cerf.png'
+  },
+  {
+    id: '5',
+    name: 'Le blaireau',
+    firstName: 'Eugène',
+    type: 'Explorateur',
+    image: '/assets/images/animals/blaireau.png'
+  },
+  {
+    id: '6',
+    name: 'Le hérisson',
+    firstName: 'Hugo',
+    type: 'Aventurier',
+    image: '/assets/images/animals/herisson.png'
+  },
+  {
+    id: '7',
+    name: 'Le cerf',
+    firstName: 'Esquie',
+    type: 'Dieu',
+    image: '/assets/images/animals/esquie.png'
+  },
+  {
+    id: '8',
+    name: 'Le hibou',
+    firstName: 'Hélène',
+    type: 'Bibliothécaire',
+    image: '/assets/images/animals/hibou.png'
+  },
+  {
+    id: '9',
+    name: 'Le lion',
+    firstName: 'Léo',
+    type: 'Ranger',
+    image: '/assets/images/animals/lion.png'
+  },
+  {
+    id: '10',
+    name: 'Le morse',
+    firstName: 'Marcel',
+    type: 'Viking',
+    image: '/assets/images/animals/morse.png'
+  },
+  {
+    id: '11',
+    name: 'Le panda roux',
+    firstName: 'Maya',
+    type: 'Tueuse',
+    image: '/assets/images/animals/panda-roux-2.png'
+  },
+  {
+    id: '12',
+    name: 'Le pingouin',
+    firstName: 'Oswald',
+    type: 'Magicien',
+    image: '/assets/images/animals/pingouin.png'
+  },
+  {
+    id: '13',
+    name: 'Le raton laveur',
+    firstName: 'Nook',
+    type: 'Inventeur',
+    image: '/assets/images/animals/raton.png'
+  },
+  {
+    id: '14',
+    name: 'Le renard',
+    firstName: 'Zoro',
+    type: 'Samouraï',
+    image: '/assets/images/animals/renard.png'
+  },
+  {
+    id: '15',
+    name: 'Le requin',
+    firstName: 'Roland',
+    type: 'Marin',
+    image: '/assets/images/animals/requin.png'
+  },
+  {
+    id: '16',
+    name: 'La souris',
+    firstName: 'Sophie',
+    type: 'Patissière',
+    image: '/assets/images/animals/souris.png'
+  },
+  {
+    id: '17',
+    name: 'Le tapir',
+    firstName: 'Théo',
+    type: 'Barde',
+    image: '/assets/images/animals/tapir.png'
+  },
+  {
+    id: '18',
+    name: 'Le lapin',
+    firstName: 'Luna',
+    type: 'Jardinière',
+    image: '/assets/images/animals/lapin.png'
   }
 ]

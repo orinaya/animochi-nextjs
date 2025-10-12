@@ -1,6 +1,6 @@
 import { type ThemeColor, type ButtonSize, type ButtonVariant } from '@/types'
 
-function getSize(size?: ButtonSize): string {
+function getSize (size?: ButtonSize): string {
   const sizes = {
     sm: 'px-3 py-1.5 text-sm',
     md: 'px-4 py-2 text-base',
@@ -10,7 +10,7 @@ function getSize(size?: ButtonSize): string {
   return sizes[size ?? 'md']
 }
 
-function getVariant(variant: ButtonVariant, color: ThemeColor, disabled: boolean): string {
+function getVariant (variant: ButtonVariant, color: ThemeColor, disabled: boolean): string {
   const baseClasses = 'font-normal rounded-lg inline-flex justify-center items-center transition-all duration-300 transform text-center'
 
   if (disabled) {
@@ -23,13 +23,13 @@ function getVariant(variant: ButtonVariant, color: ThemeColor, disabled: boolean
       primary: `${baseClasses} bg-blueberry-950 hover:bg-blueberry-900 text-white border-blueberry-950 focus:ring-blueberry-950`,
       secondary: `${baseClasses} bg-latte-25 hover:bg-latte-50 text-blueberry-950 border-latte-100 focus:ring-blueberry-950`,
       ghost: `${baseClasses} bg-white text-blueberry-950 border-1 focus:ring-blueberry-950 hover:bg-blueberry-50`,
-      outline: `${baseClasses} bg-transparent hover:bg-latte-25 text-blueberry-950 border-latte-200 hover:border-blueberry-950 focus:ring-blueberry-950`
+      outline: `${baseClasses} bg-transparent border-1 hover:bg-latte-25 text-blueberry-950 border-latte-200 hover:border-blueberry-950 focus:ring-blueberry-950`
     },
     strawberry: {
       primary: `${baseClasses} bg-strawberry-400 hover:bg-strawberry-500 text-white border-strawberry-400 focus:ring-strawberry-400`,
       secondary: `${baseClasses} bg-strawberry-100 hover:bg-strawberry-200 text-strawberry-600 border-strawberry-100 focus:ring-strawberry-400`,
       ghost: `${baseClasses} bg-transparent hover:bg-strawberry-100 text-strawberry-600 border-transparent focus:ring-strawberry-400 border-1`,
-      outline: `${baseClasses} bg-transparent hover:bg-strawberry-100 text-strawberry-600 border-strawberry-300 hover:border-strawberry-400 focus:ring-strawberry-400`
+      outline: `${baseClasses} bg-transparent border-1 hover:bg-latte-25 text-strawberry-600 border-strawberry-600 hover:border-strawberry-400 hover:text-strawberry-500 focus:ring-strawberry-400`
     },
     peach: {
       primary: `${baseClasses} bg-peach-100 hover:bg-peach-200 text-peach-800 border-peach-100 focus:ring-peach-100`,
@@ -62,7 +62,7 @@ interface ButtonProps {
   iconCenter?: React.ComponentType<{ className?: string }>
 }
 
-function Button({
+function Button ({
   children = 'Click me',
   onClick,
   size = 'md',

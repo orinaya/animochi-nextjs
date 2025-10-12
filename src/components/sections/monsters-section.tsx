@@ -12,7 +12,6 @@ export default function MonstersSection ({ children }: MonstersSectionProps): Re
       id='monsters'
       title='Rencontrez vos futurs compagnons'
       subtitle='Chaque créature Animochi possède sa propre personnalité, ses besoins et ses talents uniques. Laquelle choisirez-vous ?'
-      className='bg-latte-25'
     >
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
         {monsters.map((monster) => (

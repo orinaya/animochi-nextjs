@@ -1,5 +1,6 @@
 export { default as Button } from './button'
 export { default as Section } from './section'
+export { default as SectionContent } from './section-content'
 export { default as BenefitCard } from './benefit-card'
 export { default as MonsterCard } from './monster-card'
 export { default as ActionCard } from './action-card'

@@ -12,7 +12,6 @@ export default function ActionsSection ({ children }: ActionsSectionProps): Reac
       id='actions'
       title='Prendre soin de votre compagnon'
       subtitle="Découvrez toutes les façons d'interagir avec votre créature pour la garder heureuse et en bonne santé."
-      className='bg-white'
     >
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
         {gameActions.map((action) => (
