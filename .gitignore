@@ -10,6 +10,11 @@
 !.yarn/releases
 !.yarn/versions
 
+# Docusaurus dependencies
+/documentation/node_modules
+/documentation/.docusaurus
+/documentation/.cache-loader
+
 # testing
 /coverage
 
@@ -19,6 +24,10 @@
 
 # production
 /build
+/documentation/build
+
+# Documentation générée (sera copiée dans public/)
+/public/documentation
 
 # misc
 .DS_Store

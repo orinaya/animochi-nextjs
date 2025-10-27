@@ -4,13 +4,13 @@ import Button from '@/components/ui/button'
 import AnimochiLogo from '@/app/animochi-line.svg'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FiUser, FiUserPlus } from 'react-icons/fi'
+import { FiUser, FiUserPlus, FiBook } from 'react-icons/fi'
 
 interface HeaderProps {
   children?: React.ReactNode
 }
 
-export default function Header ({ children }: HeaderProps): React.ReactNode {
+export default function Header({ children }: HeaderProps): React.ReactNode {
   return (
     <header className=' top-0 left-0 right-0 z-50 bg-strawberry-100 backdrop-blur-md px-4 py-3'>
       <div className='max-w-6xl mx-auto flex items-center justify-between'>
@@ -41,6 +41,9 @@ export default function Header ({ children }: HeaderProps): React.ReactNode {
 
         {/* CTA Button */}
         <div className='hidden md:flex items-center gap-4'>
+          <Button size='md' variant='ghost' color='latte' iconBefore={FiBook}>
+            <Link href='/documentation'>Documentation</Link>
+          </Button>
           <Button size='md' variant='ghost' color='blueberry' iconBefore={FiUser}>
             Se connecter
           </Button>
