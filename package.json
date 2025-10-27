@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "dev:docs": "cd documentation && npm run start",
-    "build": "next build --turbopack",
-    "build:docs": "cd documentation && npm run build",
+    "build": "next build && cd documentation && npm ci && npm run build",
+    "build:next": "next build",
+    "build:docs": "cd documentation && npm ci && npm run build",
     "build:all": "npm run build && npm run build:docs && npm run merge-outputs",
     "merge-outputs": "node scripts/merge-outputs.js",
     "start": "next start",
