@@ -1,0 +1,42 @@
+<svg width="250" height="250" viewBox="0 0 250 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g id="FoxCharacter">
+
+        <g id="Body">
+            <ellipse cx="125" cy="170" rx="45" ry="40" fill="#FF7800"/>
+            <ellipse cx="125" cy="170" rx="35" ry="30" fill="#FFE0B2"/>
+            <rect x="100" y="195" width="15" height="20" rx="7" fill="#FF7800"/>
+            <rect x="135" y="195" width="15" height="20" rx="7" fill="#FF7800"/>
+        </g>
+
+        <g id="Head">
+            <circle cx="125" cy="100" r="50" fill="#FF7800"/>
+            <circle cx="125" cy="100" r="40" fill="#FFE0B2"/>
+
+            <ellipse cx="125" cy="115" rx="20" ry="15" fill="#FFFFFF"/>
+            <circle cx="125" cy="110" r="7" fill="#333333"/> <circle cx="105" cy="90" r="5" fill="#333333"/>
+            <circle cx="145" cy="90" r="5" fill="#333333"/>
+
+            <circle cx="118" cy="115" r="2" fill="#333333" opacity="0.6"/>
+            <circle cx="132" cy="115" r="2" fill="#333333" opacity="0.6"/>
+        </g>
+
+        <g id="Ears">
+            <path d="M90 60 L75 30 L105 50 Z" fill="#FF7800"/>
+            <path d="M100 50 L90 40 L97 48 Z" fill="#FFE0B2"/>
+
+            <path d="M160 60 L175 30 L145 50 Z" fill="#FF7800"/>
+            <path d="M150 50 L160 40 L153 48 Z" fill="#FFE0B2"/>
+        </g>
+
+        <g id="Arms">
+            <rect x="70" y="140" width="15" height="40" rx="7" fill="#FF7800"/>
+            <rect x="165" y="140" width="15" height="40" rx="7" fill="#FF7800"/>
+        </g>
+
+        <g id="Tail">
+            <path d="M170 180 Q200 150 200 190 Q200 220 170 200 Z" fill="#FF7800"/>
+            <path d="M190 190 Q195 200 180 200 L170 195 Z" fill="#FFFFFF"/>
+        </g>
+
+    </g>
+</svg>

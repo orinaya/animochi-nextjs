@@ -4,6 +4,8 @@ export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl'
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'outline'
 
+export * from './monster'
+
 export type MonsterRarity = 'Commun' | 'Rare' | 'Épique' | 'Légendaire'
 
 export interface Monster {

@@ -14,9 +14,9 @@ import {
   FloatingMonster
 } from '../ui'
 
-function AuthFormContent (): React.ReactNode {
-  const [isSignIn, setIsSignIn] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+function AuthFormContent(): React.ReactNode {
+  const [isSignIn, setIsSignIn] = useState<boolean>(true)
+  const [error, setError] = useState<string>('')
 
   const handleAuthError = (errorMessage: string): void => {
     setError(errorMessage)
@@ -24,7 +24,7 @@ function AuthFormContent (): React.ReactNode {
 
   const handleFormSwitch = (): void => {
     setIsSignIn(!isSignIn)
-    setError(null) // Clear errors when switching forms
+    setError('') // Clear errors when switching forms
   }
 
   return (
@@ -78,12 +78,12 @@ function AuthFormContent (): React.ReactNode {
           <ErrorMessage message={error} />
 
           {isSignIn
-? (
-            <SignInForm onError={handleAuthError} />
-          )
-: (
-            <SignUpForm onError={handleAuthError} />
-          )}
+            ? (
+              <SignInForm onError={handleAuthError} />
+            )
+            : (
+              <SignUpForm onError={handleAuthError} />
+            )}
 
           <div className='mt-6 text-center'>
             <Button

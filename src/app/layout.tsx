@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+// import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 
@@ -12,24 +12,24 @@ const geistMono = Geist_Mono({
   subsets: ['latin']
 })
 
-export const metadata: Metadata = {
-  title: 'Animochi',
-  description: 'description',
-  icons: {
-    icon: [
-      { url: '/animochi-favicon.svg', type: 'image/svg+xml' },
-      { url: '/animochi-favicon.svg', sizes: '16x16', type: 'image/svg+xml' },
-      { url: '/animochi-favicon.svg', sizes: '32x32', type: 'image/svg+xml' }
-    ],
-    shortcut: [{ url: '/animochi-favicon.svg', type: 'image/svg+xml' }]
-    // apple: [
-    //   { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }
-    // ]
-  },
-  manifest: '/manifest.json'
-}
+// export const metadata: Metadata = {
+//   title: 'Animochi',
+//   description: 'description',
+//   icons: {
+//     icon: [
+//       { url: '/animochi-favicon.svg', type: 'image/svg+xml' },
+//       { url: '/animochi-favicon.svg', sizes: '16x16', type: 'image/svg+xml' },
+//       { url: '/animochi-favicon.svg', sizes: '32x32', type: 'image/svg+xml' }
+//     ],
+//     shortcut: [{ url: '/animochi-favicon.svg', type: 'image/svg+xml' }]
+//     // apple: [
+//     //   { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }
+//     // ]
+//   },
+//   manifest: '/manifest.json'
+// }
 
-export default function RootLayout({
+export default function RootLayout ({
   children
 }: Readonly<{
   children: React.ReactNode
@@ -37,8 +37,11 @@ export default function RootLayout({
   return (
     <html lang='fr'>
       <head>
-        <link rel='icon' href='/animochi-favicon.svg' type='image/svg+xml' />
-        <link rel='shortcut icon' href='/animochi-favicon.svg' type='image/svg+xml' />
+        <link rel='icon' type='image/png' href='/favicon-96x96.png' sizes='96x96' />
+        <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+        <link rel='shortcut icon' href='/favicon.ico' />
+        <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png' />
+        <link rel='manifest' href='/site.webmanifest' />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
     </html>

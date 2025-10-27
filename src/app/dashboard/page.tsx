@@ -1,6 +1,5 @@
-'use client'
-
-import { Button } from '@/components/ui'
+import { getMonsters } from '@/actions/monsters.action'
+import DashboardContent from '@/components/dashboard/dashboard-content'
 import { auth } from '@/lib/auth'
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
@@ -10,30 +9,14 @@ async function DashboardPage (): Promise<React.ReactNode> {
     headers: await headers()
   })
 
+  const monsters = await getMonsters()
+  const plainMonsters = JSON.parse(JSON.stringify(monsters))
   if (session === null || session === undefined) {
     redirect('/sign-in')
   }
 
-  const handleSignOut = async (): Promise<void> => {
-    await auth.api.signOut({
-      headers: await headers()
-    })
-    redirect('/sign-in')
-  }
-
   return (
-    <div>
-      <h1>Welcome {session.user.name}</h1>
-      <p>This is your dashboard.</p>
-      <pre>{JSON.stringify(session, null, 2)}</pre>
-      <Button
-        onClick={() => {
-          void handleSignOut()
-        }}
-      >
-        Se déconnecter
-      </Button>
-    </div>
+    <DashboardContent session={session} monsters={plainMonsters} />
   )
 }
 

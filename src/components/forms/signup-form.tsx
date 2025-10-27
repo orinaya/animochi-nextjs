@@ -13,7 +13,7 @@ interface SignUpFormProps {
   onError: (error: string) => void
 }
 
-function SignUpForm ({ onError }: SignUpFormProps): React.ReactNode {
+function SignUpForm({ onError }: SignUpFormProps): React.ReactNode {
   const [credentials, setCredentials] = useState<Credentials>({
     email: '',
     password: '',
@@ -86,7 +86,7 @@ function SignUpForm ({ onError }: SignUpFormProps): React.ReactNode {
             password: e.target.value
           })}
       />
-      <InputField
+      {/* <InputField
         type='password'
         name='confirmPassword'
         label='Confirmer le mot de passe'
@@ -102,7 +102,7 @@ function SignUpForm ({ onError }: SignUpFormProps): React.ReactNode {
             ...credentials,
             confirmPassword: e.target.value
           })}
-      />
+      /> */}
       <Button
         type='submit'
         variant='primary'

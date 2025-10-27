@@ -33,7 +33,7 @@ export default function HeroSection ({ children }: HeroSectionProps): React.Reac
         style={{
           transform: 'rotate(5deg)',
           flexShrink: 0,
-          top: '50%',
+          top: '60%',
           left: '30%'
         }}
       />
@@ -60,7 +60,7 @@ export default function HeroSection ({ children }: HeroSectionProps): React.Reac
         style={{
           transform: 'rotate(-3deg)',
           flexShrink: 0,
-          top: '50%',
+          top: '60%',
           right: '30%'
         }}
       />
@@ -94,7 +94,7 @@ export default function HeroSection ({ children }: HeroSectionProps): React.Reac
               Découvrir nos fonctionnalités
             </Button>
           </>
-  }
+        }
       />
     </section>
   )
