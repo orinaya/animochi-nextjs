@@ -1,9 +1,9 @@
-import { MonsterRarity } from '.'
+import {MonsterRarity, ThemeColor} from "."
 
 /**
  * États possibles d'un monstre
  */
-export type MonsterState = 'happy' | 'sad' | 'angry' | 'hungry' | 'sleepy'
+export type MonsterState = "happy" | "sad" | "angry" | "hungry" | "sleepy"
 
 /**
  * Interface de base représentant les données essentielles d'un monstre
@@ -67,13 +67,13 @@ export interface Monster {
   /** Description du monstre */
   description?: string
   /** Couleur du monstre */
-  color?: string
+  color?: ThemeColor
   /** Emoji représentant le monstre */
   emoji?: string
   /** Représentation visuelle */
   draw?: string
   /** Rareté du monstre */
-  rarity?: MonsterRarity | string | null
+  rarity?: MonsterRarity
   /** Niveau du monstre (optionnel pour états de chargement) */
   level?: number | null
   /** État du monstre (optionnel, peut être string pour compatibilité) */
@@ -94,7 +94,7 @@ export interface Monster {
 export const DEFAULT_MONSTER_LEVEL = 1
 
 /** État par défaut lors de la création d'un monstre */
-export const DEFAULT_MONSTER_STATE: MonsterState = 'happy'
+export const DEFAULT_MONSTER_STATE: MonsterState = "happy"
 
 /** ID propriétaire temporaire en attente d'authentification */
-export const DEFAULT_MONSTER_OWNER_ID = 'pending-owner'
+export const DEFAULT_MONSTER_OWNER_ID = "pending-owner"

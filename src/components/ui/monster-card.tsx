@@ -3,14 +3,14 @@ import { type ThemeColor, type MonsterRarity } from '@/types'
 
 interface MonsterCardProps {
   name: string
-  description: string
-  color: ThemeColor
-  emoji: string
-  rarity: MonsterRarity
+  description?: string
+  color?: ThemeColor
+  emoji?: string
+  rarity?: MonsterRarity
   children?: React.ReactNode
 }
 
-function getRarityColor (rarity: string): string {
+function getRarityColor (rarity: string = 'Commun'): string {
   switch (rarity) {
     case 'Commun':
       return 'text-latte-700 bg-latte-100 border-latte-200'
@@ -25,7 +25,7 @@ function getRarityColor (rarity: string): string {
   }
 }
 
-function getCardColor (color: string): string {
+function getCardColor (color: string = 'latte'): string {
   switch (color) {
     case 'blueberry':
       return 'border-latte-200 hover:border-blueberry-950 hover:shadow-md'
@@ -42,10 +42,10 @@ function getCardColor (color: string): string {
 
 export default function MonsterCard ({
   name,
-  description,
-  color,
-  emoji,
-  rarity,
+  description = '',
+  color = 'latte',
+  emoji = '🎮',
+  rarity = 'Commun',
   children
 }: MonsterCardProps): React.ReactNode {
   return (

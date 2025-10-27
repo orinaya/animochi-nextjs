@@ -52,7 +52,7 @@ function MonsterCard ({
   id,
   _id,
   name,
-  draw,
+  draw = '',
   level = 1,
   state = 'happy',
   createdAt,
