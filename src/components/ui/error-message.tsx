@@ -7,7 +7,7 @@ interface ErrorMessageProps {
 
 export default function ErrorMessage ({
   message,
-  className = '',
+  className = ''
 }: ErrorMessageProps): React.ReactNode {
   if (message == null || message === '') return null
 

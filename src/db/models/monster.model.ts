@@ -21,13 +21,13 @@ const monsterSchema = new Schema(
       type: String,
       required: true,
       enum: ['happy', 'sad', 'angry', 'hungry', 'sleepy'],
-      default: 'happy',
+      default: 'happy'
     },
     ownerId: {
       type: Schema.Types.ObjectId,
       ref: 'user',
       required: true
-    },
+    }
   },
   {
     bufferCommands: false,

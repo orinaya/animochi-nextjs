@@ -14,7 +14,7 @@ import {
   FloatingMonster
 } from '../ui'
 
-function AuthFormContent(): React.ReactNode {
+function AuthFormContent (): React.ReactNode {
   const [isSignIn, setIsSignIn] = useState<boolean>(true)
   const [error, setError] = useState<string>('')
 
@@ -80,10 +80,10 @@ function AuthFormContent(): React.ReactNode {
           {isSignIn
             ? (
               <SignInForm onError={handleAuthError} />
-            )
+              )
             : (
               <SignUpForm onError={handleAuthError} />
-            )}
+              )}
 
           <div className='mt-6 text-center'>
             <Button

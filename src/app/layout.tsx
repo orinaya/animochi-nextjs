@@ -1,6 +1,7 @@
 // import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
+import ToastProvider from '@/components/toast-provider'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -43,7 +44,10 @@ export default function RootLayout ({
         <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png' />
         <link rel='manifest' href='/site.webmanifest' />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        {children}
+        <ToastProvider />
+      </body>
     </html>
   )
 }

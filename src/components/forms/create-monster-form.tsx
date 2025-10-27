@@ -2,69 +2,91 @@
 
 import { useState } from 'react'
 import InputField from '@/components/ui/input'
-import Button from '@/components/ui/button'
-import { DEFAULT_MONSTER_LEVEL, DEFAULT_MONSTER_STATE, DEFAULT_MONSTER_OWNER_ID, type CreateMonsterFormValues } from '@/types'
+import FormError from './form-error'
+import MonsterPreview from './monster-preview'
+import FormActions from './form-actions'
+import { useMonsterFormState, useMonsterGenerator } from './hooks'
+import {
+  DEFAULT_MONSTER_LEVEL,
+  DEFAULT_MONSTER_STATE,
+  DEFAULT_MONSTER_OWNER_ID,
+  type CreateMonsterFormValues
+} from '@/types'
 import { validateCreateMonsterForm } from '@/components/forms/validators/create-monster-validation'
-import { generateMonsterSvg } from '@/components/forms/utils/generate-monster-svg'
 
+/**
+ * Props pour le composant CreateMonsterForm
+ */
 interface CreateMonsterFormProps {
+  /** ID du propriétaire par défaut (optionnel) */
   defaultOwnerId?: string
+  /** Callback appelée lors de la soumission du formulaire */
   onSubmit: (values: CreateMonsterFormValues) => Promise<void> | void
+  /** Callback appelée lors de l'annulation (optionnel) */
   onCancel?: () => void
 }
 
-interface FormFields {
-  name: string
-  draw: string
-}
-
+/**
+ * Formulaire de création d'un nouveau monstre
+ *
+ * Permet à l'utilisateur de :
+ * - Saisir un nom pour sa créature
+ * - Générer une représentation visuelle unique basée sur le nom
+ * - Soumettre le formulaire pour créer la créature
+ *
+ * Respecte le principe SRP : Orchestre uniquement le formulaire de création
+ * Respecte le principe DIP : Utilise des hooks et composants abstraits
+ * Respecte le principe OCP : Extension via props sans modification du code
+ *
+ * @param {CreateMonsterFormProps} props - Les propriétés du composant
+ * @returns {React.ReactNode} Le formulaire de création complet
+ *
+ * @example
+ * ```tsx
+ * <CreateMonsterForm
+ *   defaultOwnerId={userId}
+ *   onSubmit={async (values) => {
+ *     await createMonster(values)
+ *   }}
+ *   onCancel={() => closeModal()}
+ * />
+ * ```
+ */
 function CreateMonsterForm ({
   defaultOwnerId = '',
   onSubmit,
   onCancel
 }: CreateMonsterFormProps): React.ReactNode {
-  const [fields, setFields] = useState<FormFields>({
-    name: '',
-    draw: ''
-  })
+  // État du formulaire via hook personnalisé
+  const { fields, updateField, setDraw } = useMonsterFormState()
+
+  // Gestion de la génération via hook personnalisé
+  const { isGenerating, error: generatorError, generate } = useMonsterGenerator()
+
+  // État local pour la soumission et les erreurs de validation
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isGenerating, setIsGenerating] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const [validationError, setValidationError] = useState<string | null>(null)
 
+  /**
+   * Gère la génération du monstre à partir du nom saisi
+   */
   const handleGenerateMonster = (): void => {
-    const trimmedName = fields.name.trim()
-
-    if (trimmedName === '') {
-      setError('Veuillez saisir un nom avant de générer votre créature.')
-      return
-    }
-
-    setError(null)
-    setIsGenerating(true)
-
-    try {
-      const svg = generateMonsterSvg(trimmedName)
-      setFields((current) => ({
-        ...current,
-        name: trimmedName,
-        draw: svg
-      }))
-    } finally {
-      setIsGenerating(false)
+    const svg = generate(fields.name)
+    if (svg !== null) {
+      setDraw(svg)
     }
   }
 
-  const handleChange = (field: keyof FormFields, value: string): void => {
-    setFields((current) => ({
-      ...current,
-      [field]: value
-    }))
-  }
-
+  /**
+   * Gère la soumission du formulaire
+   *
+   * @param {React.FormEvent<HTMLFormElement>} event - Événement de soumission
+   */
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
-    setError(null)
+    setValidationError(null)
 
+    // Construction du payload avec valeurs par défaut
     const ownerId = defaultOwnerId === '' ? DEFAULT_MONSTER_OWNER_ID : defaultOwnerId
 
     const payload: CreateMonsterFormValues = {
@@ -75,12 +97,14 @@ function CreateMonsterForm ({
       ownerId
     }
 
-    const validationError = validateCreateMonsterForm(payload)
-    if (validationError != null) {
-      setError(validationError)
+    // Validation du formulaire
+    const error = validateCreateMonsterForm(payload)
+    if (error != null) {
+      setValidationError(error)
       return
     }
 
+    // Soumission
     setIsSubmitting(true)
 
     void (async () => {
@@ -88,36 +112,19 @@ function CreateMonsterForm ({
         await onSubmit(payload)
       } catch (submitError: unknown) {
         console.error('Erreur lors de la création du monstre:', submitError)
-        setError('Impossible de créer la créature pour le moment. Réessayez plus tard.')
+        setValidationError('Impossible de créer la créature pour le moment. Réessayez plus tard.')
       } finally {
         setIsSubmitting(false)
       }
     })()
   }
 
-  let previewContent: React.ReactNode
-  if (fields.draw !== '') {
-    previewContent = (
-      <div
-        className='w-full h-full flex items-center justify-center'
-        dangerouslySetInnerHTML={{ __html: fields.draw }}
-      />
-    )
-  } else {
-    previewContent = (
-      <p className='text-center text-latte-600 px-6'>
-        Générez votre créature pour prévisualiser son illustration animée ici.
-      </p>
-    )
-  }
+  // Combine les erreurs de génération et de validation
+  const displayError = generatorError ?? validationError
 
   return (
     <form className='space-y-6' onSubmit={handleSubmit}>
-      {error != null && (
-        <p className='text-sm text-strawberry-600 bg-strawberry-25 border border-strawberry-200 rounded-2xl px-4 py-3'>
-          {error}
-        </p>
-      )}
+      <FormError message={displayError} />
 
       <InputField
         type='text'
@@ -126,45 +133,17 @@ function CreateMonsterForm ({
         placeholder='Par exemple : Mochi'
         value={fields.name}
         required
-        onChangeText={(text) => handleChange('name', text)}
+        onChangeText={(text) => updateField('name', text)}
       />
 
       <div className='space-y-4'>
-        <div className='w-full aspect-square rounded-3xl border border-latte-200 bg-latte-25 flex items-center justify-center overflow-hidden p-4'>
-          {previewContent}
-        </div>
-        <Button
-          type='button'
-          variant='secondary'
-          color='blueberry'
-          className='w-full'
-          onClick={handleGenerateMonster}
-          disabled={isGenerating}
-        >
-          {isGenerating ? 'Génération en cours...' : 'Générer mon monstre'}
-        </Button>
-      </div>
-      <div className='flex flex-col sm:flex-row sm:justify-end gap-4 pt-2'>
-        {onCancel != null && (
-          <Button
-            type='button'
-            variant='ghost'
-            color='latte'
-            className='sm:w-auto w-full'
-            onClick={onCancel}
-          >
-            Annuler
-          </Button>
-        )}
-        <Button
-          type='submit'
-          variant='primary'
-          color='strawberry'
-          className='sm:w-auto w-full'
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? 'Création en cours...' : 'Créer la créature'}
-        </Button>
+        <MonsterPreview draw={fields.draw} />
+        <FormActions
+          isSubmitting={isSubmitting}
+          isGenerating={isGenerating}
+          onCancel={onCancel}
+          onGenerate={handleGenerateMonster}
+        />
       </div>
     </form>
   )

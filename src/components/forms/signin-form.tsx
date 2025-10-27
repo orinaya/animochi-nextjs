@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 import InputField from '../ui/input'
 import { Button } from '../ui'
@@ -15,7 +17,7 @@ interface SignInFormProps {
 function SignInForm ({ onError }: SignInFormProps): React.ReactNode {
   const [credentials, setCredentials] = useState<Credentials>({
     email: '',
-    password: '',
+    password: ''
   })
   const [isLoading, setIsLoading] = useState(false)
 
@@ -27,7 +29,7 @@ function SignInForm ({ onError }: SignInFormProps): React.ReactNode {
       {
         email: credentials.email,
         password: credentials.password,
-        callbackURL: '/dashboard',
+        callbackURL: '/dashboard'
       },
       {
         onRequest: (ctx) => {

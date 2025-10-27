@@ -4,11 +4,17 @@ export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl'
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'outline'
 
+// Export tous les types de monstre (Monster, MonsterState, etc.)
 export * from './monster'
+export * from './monster-actions'
 
 export type MonsterRarity = 'Commun' | 'Rare' | 'Épique' | 'Légendaire'
 
-export interface Monster {
+/**
+ * Représentation simplifiée d'un monstre pour l'affichage marketing/public
+ * (Différent de Monster qui est le type principal des monstres utilisateur)
+ */
+export interface MarketingMonster {
   id: string
   name: string
   description: string

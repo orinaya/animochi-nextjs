@@ -89,49 +89,49 @@ const THEME_PALETTES: Record<ThemeId, PaletteTheme> = {
     belly: ['#ffe6f7', '#fff2fb'],
     accent: ['#ffcad4', '#ffe5ec'],
     eye: ['#2b2d42', '#3a3058'],
-    outline: '#332d4f',
+    outline: '#332d4f'
   },
   forest: {
     body: ['#a0d995', '#8bcf8a', '#74c69d'],
     belly: ['#e3f6d9', '#d7f2cb'],
     accent: ['#90b44b', '#cdf2a6'],
     eye: ['#1e2a23'],
-    outline: '#2b2f2a',
+    outline: '#2b2f2a'
   },
   aqua: {
     body: ['#69d2e7', '#6ec4ff', '#5fb0f5'],
     belly: ['#d0f4ff', '#e6fbff'],
     accent: ['#4ac1c9', '#7dddf2'],
     eye: ['#0f2540', '#182848'],
-    outline: '#1f2d42',
+    outline: '#1f2d42'
   },
   sunny: {
     body: ['#ffb347', '#f9a620', '#ff9f1c'],
     belly: ['#ffe5b4', '#fff0d0'],
     accent: ['#ffd166', '#ffbe0b'],
     eye: ['#3d1f0f'],
-    outline: '#2f1f16',
+    outline: '#2f1f16'
   },
   berry: {
     body: ['#8f72e0', '#7c5ce0', '#6f53c6'],
     belly: ['#dfd4ff', '#e9ddff'],
     accent: ['#ffcad4', '#f6bd60'],
     eye: ['#120d1f', '#1c1333'],
-    outline: '#20143a',
+    outline: '#20143a'
   },
   midnight: {
     body: ['#4d5483', '#45506e', '#515e91'],
     belly: ['#d6dcff', '#c2c9ff'],
     accent: ['#8fb8ff', '#79a6ff'],
     eye: ['#f8f9fa', '#dfe2ff'],
-    outline: '#1b1f36',
+    outline: '#1b1f36'
   },
   earth: {
     body: ['#e2c290', '#d4a373', '#bf8b5e'],
     belly: ['#f6e7c1', '#f2dcb3'],
     accent: ['#cbb682', '#ab8d5d'],
     eye: ['#2e1f18'],
-    outline: '#2d1b10',
+    outline: '#2d1b10'
   }
 }
 
@@ -297,7 +297,7 @@ const MONSTER_PRESETS: MonsterPreset[] = [
     faceYOffset: -1,
     eyeSize: { width: [3, 3], height: [3, 3] },
     eyeOffset: [6, 7]
-  },
+  }
 ]
 
 function clamp (value: number, min: number, max: number): number {

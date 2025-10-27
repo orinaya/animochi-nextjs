@@ -1,54 +1,75 @@
 'use client'
-import { useState } from 'react'
 
 import CreateMonsterModal from './create-monster-modal'
+import DashboardHeader from './dashboard-header'
+import DashboardActions from './dashboard-actions'
+import { useModal, useAuth, useMonsterCreation } from './hooks'
 
 import { authClient } from '@/lib/auth-client'
-
 import MonstersList from '../monsters/monsters-list'
-import { CreateMonsterFormValues, Monster } from '@/types'
-import { createMonster } from '@/actions/monsters.action'
-import { Button } from '../ui'
+import type { Monster } from '@/types'
 
 type Session = typeof authClient.$Infer.Session
 
-function DashboardContent ({ session, monsters }: { session: Session, monsters: Monster[] }): React.ReactNode {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+/**
+ * Props pour le composant DashboardContent
+ */
+interface DashboardContentProps {
+  /** Session utilisateur authentifié */
+  session: Session
+  /** Liste des monstres appartenant à l'utilisateur */
+  monsters: Monster[]
+}
 
-  const handleLogout = (): void => {
-    void authClient.signOut()
-    window.location.href = '/sign-in'
-  }
+/**
+ * Composant principal du contenu du Dashboard
+ *
+ * Orchestre l'affichage des différentes sections du dashboard (header, actions, liste des monstres)
+ * et gère l'état de la modale de création de monstre.
+ *
+ * Respecte le principe SRP : Orchestre uniquement l'affichage du dashboard
+ * Respecte le principe DIP : Dépend des abstractions (hooks) plutôt que d'implémentations
+ *
+ * @param {DashboardContentProps} props - Les propriétés du composant
+ * @returns {React.ReactNode} Le contenu complet du dashboard
+ *
+ * @example
+ * ```tsx
+ * <DashboardContent session={session} monsters={monsters} />
+ * ```
+ */
+function DashboardContent ({ session, monsters }: DashboardContentProps): React.ReactNode {
+  // Gestion de l'état du modal via hook personnalisé
+  const { isOpen, open, close } = useModal()
 
-  const handleCreateMonster = (): void => {
-    setIsModalOpen(true)
-  }
+  // Gestion de l'authentification via hook personnalisé
+  const { logout } = useAuth()
 
-  const handleCloseModal = (): void => {
-    setIsModalOpen(false)
-  }
-
-  const handleMonsterSubmit = async (values: CreateMonsterFormValues): Promise<void> => {
-    void values
-    await createMonster(values)
-  }
+  // Gestion de la création de monstre via hook personnalisé
+  const { handleSubmit } = useMonsterCreation(() => {
+    // Callback de succès : ferme le modal et recharge la page pour afficher le nouveau monstre
+    close()
+    window.location.reload()
+  })
 
   return (
-    <div className='flex flex-col items-center justify-center min-h-screen py-2'>
-      <h1 className='text-4xl font-bold mb-4'>Bienvenue {session.user.email} sur votre tableau de bord</h1>
-      <Button onClick={handleCreateMonster}>
-        Créer une créature
-      </Button>
-      <MonstersList monsters={monsters} />
-      <p className='text-lg text-gray-600'>Ici, vous pouvez gérer vos créatures et suivre votre progression.</p>
-      <Button onClick={handleLogout}>
-        Se déconnecter
-      </Button>
-      <CreateMonsterModal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        onSubmit={handleMonsterSubmit}
-      />
+    <div className='flex flex-col items-center justify-center min-h-screen py-8 px-4'>
+      <div className='w-full max-w-7xl space-y-8'>
+        <DashboardHeader session={session} />
+
+        <DashboardActions
+          onCreateMonster={open}
+          onLogout={logout}
+        />
+
+        <MonstersList monsters={monsters} />
+
+        <CreateMonsterModal
+          isOpen={isOpen}
+          onClose={close}
+          onSubmit={handleSubmit}
+        />
+      </div>
     </div>
   )
 }

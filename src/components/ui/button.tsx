@@ -1,3 +1,5 @@
+'use client'
+
 import { type ThemeColor, type ButtonSize, type ButtonVariant } from '@/types'
 
 function getSize (size?: ButtonSize): string {

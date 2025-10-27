@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 import InputField from '../ui/input'
 import { Button } from '../ui'
@@ -13,21 +15,21 @@ interface SignUpFormProps {
   onError: (error: string) => void
 }
 
-function SignUpForm({ onError }: SignUpFormProps): React.ReactNode {
+function SignUpForm ({ onError }: SignUpFormProps): React.ReactNode {
   const [credentials, setCredentials] = useState<Credentials>({
     email: '',
     password: '',
-    confirmPassword: '',
+    confirmPassword: ''
   })
   const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
 
-    if (credentials.password !== credentials.confirmPassword) {
-      onError('Les mots de passe ne correspondent pas')
-      return
-    }
+    // if (credentials.password !== credentials.confirmPassword) {
+    //   onError('Les mots de passe ne correspondent pas')
+    //   return
+    // }
 
     if (credentials.password.length < 6) {
       onError('Le mot de passe doit contenir au moins 6 caractères')
@@ -41,7 +43,7 @@ function SignUpForm({ onError }: SignUpFormProps): React.ReactNode {
         email: credentials.email,
         password: credentials.password,
         name: '',
-        callbackURL: '/sign-in',
+        callbackURL: '/sign-in'
       },
       {
         onRequest: (ctx) => {

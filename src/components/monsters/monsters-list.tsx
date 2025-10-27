@@ -1,39 +1,44 @@
 import MonsterCard from './monster-card'
-import type { MonsterState } from '@/types/monster'
+import MonstersEmptyState from './monsters-empty-state'
+import MonstersListHeader from './monsters-list-header'
+import type { Monster } from '@/types/monster'
 
-interface DashboardMonster {
-  id?: string
-  _id?: string
-  name: string
-  draw: string
-  level?: number | null
-  state?: MonsterState | string | null
-  createdAt?: string
-  updatedAt?: string
+/**
+ * Props pour le composant MonstersList
+ */
+interface MonstersListProps {
+  /** Liste des monstres à afficher */
+  monsters: Monster[]
 }
 
-function MonstersList ({ monsters }: { monsters: DashboardMonster[] }): React.ReactNode {
+/**
+ * Liste des monstres de l'utilisateur
+ *
+ * Affiche une grille responsive de cartes de monstres avec :
+ * - Un état vide stylisé si aucun monstre
+ * - Un en-tête avec compteur
+ * - Une grille adaptative (1 colonne mobile, 2 tablette, 3 desktop)
+ *
+ * Respecte le principe SRP : Orchestre uniquement l'affichage de la liste
+ * Respecte le principe OCP : Composition de sous-composants réutilisables
+ *
+ * @param {MonstersListProps} props - Les propriétés du composant
+ * @returns {React.ReactNode} La liste complète des monstres
+ *
+ * @example
+ * ```tsx
+ * <MonstersList monsters={userMonsters} />
+ * ```
+ */
+function MonstersList ({ monsters }: MonstersListProps): React.ReactNode {
+  // Affiche un état vide si aucun monstre
   if (monsters === null || monsters === undefined || monsters.length === 0) {
-    return (
-      <div className='text-center py-12'>
-        <div className='text-6xl mb-4'>🐾</div>
-        <h3 className='text-xl font-semibold text-blueberry-950 mb-2'>
-          Aucun monstre trouvé
-        </h3>
-        <p className='text-latte-600'>
-          Il est temps de créer votre premier compagnon !
-        </p>
-      </div>
-    )
+    return <MonstersEmptyState />
   }
 
   return (
     <div className='space-y-6'>
-      <div className='flex items-center justify-between'>
-        <h2 className='text-2xl font-bold text-blueberry-950'>
-          Vos Monstres ({monsters.length})
-        </h2>
-      </div>
+      <MonstersListHeader count={monsters.length} />
 
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
         {monsters.map((monster) => (

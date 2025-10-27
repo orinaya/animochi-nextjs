@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "react-toastify/dist/ReactToastify.css";
 
 /* --- Tehegan --- */
 @font-face {
@@ -71,7 +72,6 @@
   font-weight: 900;
   font-style: normal;
 }
-
 
 :root {
   --background: var(--color-latte-50);
@@ -154,4 +154,67 @@ body {
 
 .font-tehegan {
   font-family: "Tehegan", serif;
+}
+
+/* Animations personnalisées pour les actions du monstre */
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-5px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+.animate-wiggle {
+  animation: wiggle 0.5s ease-in-out infinite;
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Animation des particules d'emojis autour du monstre */
+@keyframes emoji-float {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.5);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(-20px) scale(1);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(-80px) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-120px) scale(0.8);
+  }
+}
+
+.animate-emoji-float {
+  animation: emoji-float 1.5s ease-out forwards;
 }

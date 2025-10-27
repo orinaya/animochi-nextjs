@@ -47,7 +47,7 @@ const client = new MongoClient(uri, {
     version: ServerApiVersion.v1,
     strict: true,
     deprecationErrors: true
-  },
+  }
 })
 async function connectToDatabase (): Promise<void> {
   if (isConnected) return

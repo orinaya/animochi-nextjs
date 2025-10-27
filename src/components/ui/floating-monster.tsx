@@ -1,3 +1,5 @@
+'use client'
+
 interface FloatingMonsterProps {
   emoji: string
   size?: 'sm' | 'md' | 'lg'
@@ -26,7 +28,7 @@ export default function FloatingMonster ({
   delay = 0,
   duration = 6,
   children,
-  className = '',
+  className = ''
 }: FloatingMonsterProps): React.ReactNode {
   const sizeClass = getSize(size)
 
@@ -39,7 +41,7 @@ export default function FloatingMonster ({
       }}
     >
       {emoji}
-      <style jsx>
+      <style>
         {`
           @keyframes float {
             0%,
