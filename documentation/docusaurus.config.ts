@@ -43,14 +43,14 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl: 'https://github.com/orinaya/animochi-nextjs/tree/master/documentation/',
+          editUrl: 'https://github.com/orinaya/animochi-nextjs/tree/master/documentation/'
         },
         blog: false, // Désactive le blog pour se concentrer sur la documentation
         theme: {
-          customCss: './src/css/custom.css',
+          customCss: './src/css/custom.css'
         }
       } satisfies Preset.Options
-    ],
+    ]
   ],
 
   themeConfig: {
@@ -63,26 +63,26 @@ const config: Config = {
       title: 'Animochi',
       logo: {
         alt: 'Animochi Logo',
-        src: 'img/logo.svg',
+        src: 'img/logo.svg'
       },
       items: [
         {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: 'Documentation',
+          label: 'Documentation'
         },
         {
           href: '/',
           label: "Retour à l'app",
-          position: 'right',
+          position: 'right'
         },
         {
           href: 'https://github.com/orinaya/animochi-nextjs',
           label: 'GitHub',
-          position: 'right',
+          position: 'right'
         }
-      ],
+      ]
     },
     footer: {
       style: 'dark',
@@ -92,26 +92,26 @@ const config: Config = {
           items: [
             {
               label: 'Introduction',
-              to: '/docs/intro',
+              to: '/docs/intro'
             },
             {
               label: 'Architecture',
-              to: '/docs/architecture',
+              to: '/docs/architecture'
             }
-          ],
+          ]
         },
         {
           title: 'Ressources',
           items: [
             {
               label: 'Application',
-              href: '/',
+              href: '/'
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/orinaya/animochi-nextjs',
+              href: 'https://github.com/orinaya/animochi-nextjs'
             }
-          ],
+          ]
         }
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Animochi. Construit avec Docusaurus.`
@@ -119,7 +119,7 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula
-    },
+    }
   } satisfies Preset.ThemeConfig
 }
 

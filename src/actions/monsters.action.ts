@@ -1,6 +1,6 @@
 'use server'
 
-import { connectToDatabase } from '@/db'
+import { connectMongooseToDatabase, connectToDatabase } from '@/db'
 import Monster from '@/db/models/monster.model'
 import { auth } from '@/lib/auth'
 import { CreateMonsterFormValues, MonsterDocument } from '@/types/monster'
@@ -113,7 +113,7 @@ export async function getMonsters (): Promise<MonsterDocument[]> {
  */
 export async function getMonsterById (id: string): Promise<MonsterDocument | null> {
   try {
-    await connectToDatabase()
+    await connectMongooseToDatabase()
 
     const session = await auth.api.getSession({
       headers: await headers()
@@ -122,14 +122,20 @@ export async function getMonsterById (id: string): Promise<MonsterDocument | nul
 
     const { user } = session
 
-    const _id = id[0]
+    // Extraction de l'ID depuis le tableau de route dynamique
+    const _id = id
+
+    // Validation du format ObjectId MongoDB
     if (!Types.ObjectId.isValid(_id)) {
-      console.error('Invalid monster ID format:', _id)
+      console.error('Invalid monster ID format')
       return null
     }
 
-    const monster = await Monster.findOne({ _id: id, ownerId: user.id }).exec()
-    return monster
+    // Récupération du monstre avec vérification de propriété
+    const monster = await Monster.findOne({ ownerId: user.id, _id }).exec()
+
+    // Sérialisation JSON pour éviter les problèmes de typage Next.js
+    return JSON.parse(JSON.stringify(monster))
   } catch (error) {
     console.error('Error fetching monsters:', error)
     return null
