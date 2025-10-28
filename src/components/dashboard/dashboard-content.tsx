@@ -7,7 +7,8 @@ import { useModal, useAuth, useMonsterCreation } from './hooks'
 
 import { authClient } from '@/lib/auth-client'
 import MonstersList from '../monsters/monsters-list'
-import type { Monster } from '@/types'
+import type { Monster, MonsterDocument } from '@/types'
+import { useEffect, useState } from 'react'
 
 type Session = typeof authClient.$Infer.Session
 
@@ -39,6 +40,7 @@ interface DashboardContentProps {
  * ```
  */
 function DashboardContent ({ session, monsters }: DashboardContentProps): React.ReactNode {
+  const [monsterList, setMonsterList] = useState<MonsterDocument[]>(monsters)
   // Gestion de l'état du modal via hook personnalisé
   const { isOpen, open, close } = useModal()
 
@@ -52,6 +54,20 @@ function DashboardContent ({ session, monsters }: DashboardContentProps): React.
     window.location.reload()
   })
 
+  useEffect(() => {
+    const fetchAndUpdateMonsters = async (): Promise<void> => {
+      const response = await fetch('/api/monsters')
+      const updatedMonsters = await response.json()
+      setMonsterList(updatedMonsters)
+    }
+
+    const interval = setInterval(() => {
+      void fetchAndUpdateMonsters()
+    }, 1000) // Met à jour toutes les 60 secondes
+
+    return () => clearInterval(interval)
+  }, [])
+
   return (
     <div className='flex flex-col items-center justify-center min-h-screen py-8 px-4'>
       <div className='w-full max-w-7xl space-y-8'>
@@ -62,7 +78,7 @@ function DashboardContent ({ session, monsters }: DashboardContentProps): React.
           onLogout={logout}
         />
 
-        <MonstersList monsters={monsters} />
+        <MonstersList monsters={monsterList} />
 
         <CreateMonsterModal
           isOpen={isOpen}

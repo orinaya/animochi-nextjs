@@ -72,7 +72,7 @@ export async function createMonster (monsterData: CreateMonsterFormValues): Prom
  */
 export async function getMonsters (): Promise<MonsterDocument[]> {
   try {
-    await connectToDatabase()
+    await connectMongooseToDatabase()
 
     const session = await auth.api.getSession({
       headers: await headers()
@@ -111,31 +111,109 @@ export async function getMonsters (): Promise<MonsterDocument[]> {
  * }
  * ```
  */
+// export async function getMonsterById (id: string): Promise<MonsterDocument | null> {
+//   try {
+//     // Connexion à la base de données
+//     await connectMongooseToDatabase()
+
+//     // Vérification de l'authentification
+//     const session = await auth.api.getSession({
+//       headers: await headers()
+//     })
+//     if (session === null || session === undefined) {
+//       throw new Error('User not authenticated')
+//     }
+
+//     const { user } = session
+
+//     // Extraction de l'ID depuis le tableau de route dynamique
+//     const _id = id
+
+//     // Validation du format ObjectId MongoDB
+//     if (!Types.ObjectId.isValid(_id)) {
+//       console.error('Invalid monster ID format')
+//       return null
+//     }
+
+//     // Récupération du monstre avec vérification de propriété
+//     const monster = await Monster.findOne({ ownerId: user.id, _id }).exec()
+
+//     // Sérialisation JSON pour éviter les problèmes de typage Next.js
+//     return JSON.parse(JSON.stringify(monster))
+//   } catch (error) {
+//     console.error('Error fetching monster by ID:', error)
+//     return null
+//   }
+// }
+
+// export async function getMonsterById (id: string): Promise<MonsterDocument | null> {
+//   try {
+//     await connectMongooseToDatabase()
+
+//     const session = await auth.api.getSession({
+//       headers: await headers()
+//     })
+//     if (session === null || session === undefined) throw new Error('User not authenticated')
+
+//     const { user } = session
+
+//     // Extraction de l'ID depuis le tableau de route dynamique
+//     const _id = id
+
+//     // Validation du format ObjectId MongoDB
+//     if (!Types.ObjectId.isValid(_id)) {
+//       console.error('Invalid monster ID format')
+//       return null
+//     }
+
+//     // Récupération du monstre avec vérification de propriété
+//     const monster = await Monster.findOne({ ownerId: user.id, _id }).exec()
+
+//     // Sérialisation JSON pour éviter les problèmes de typage Next.js
+//     return JSON.parse(JSON.stringify(monster))
+//   } catch (error) {
+//     console.error('Error fetching monsters:', error)
+//     return null
+//   }
+// }
+
+/**
+ * Récupère un monstre spécifique par son ID
+ *
+ * Server Action qui :
+ * - Vérifie l'authentification
+ * - Vérifie que l'ID est un ObjectId MongoDB valide
+ * - Récupère le monstre uniquement s'il appartient à l'utilisateur
+ * - Retourne null en cas d'erreur ou si non trouvé
+ *
+ * Respecte le principe SRP : Gère uniquement la récupération d'un monstre
+ *
+ * @param {string} id - ID du monstre à récupérer (tableau pour Next.js dynamic routes)
+ * @returns {Promise<MonsterDocument | null>} Le monstre trouvé ou null
+ *
+ * @example
+ * ```tsx
+ * const monster = await getMonsterById('507f1f77bcf86cd799439011')
+ * if (monster) {
+ *   console.log(`Monstre ${monster.name} trouvé`)
+ * }
+ * ```
+ */
 export async function getMonsterById (id: string): Promise<MonsterDocument | null> {
   try {
-    await connectMongooseToDatabase()
-
+    await connectToDatabase()
     const session = await auth.api.getSession({
       headers: await headers()
     })
     if (session === null || session === undefined) throw new Error('User not authenticated')
-
     const { user } = session
-
-    // Extraction de l'ID depuis le tableau de route dynamique
-    const _id = id
-
-    // Validation du format ObjectId MongoDB
+    const _id = id[0]
     if (!Types.ObjectId.isValid(_id)) {
-      console.error('Invalid monster ID format')
+      console.error('Invalid monster ID format:', _id)
       return null
     }
-
-    // Récupération du monstre avec vérification de propriété
-    const monster = await Monster.findOne({ ownerId: user.id, _id }).exec()
-
-    // Sérialisation JSON pour éviter les problèmes de typage Next.js
-    return JSON.parse(JSON.stringify(monster))
+    const monster = await Monster.findOne({ _id: id, ownerId: user.id }).exec()
+    return monster
   } catch (error) {
     console.error('Error fetching monsters:', error)
     return null
